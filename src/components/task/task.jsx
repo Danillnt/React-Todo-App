@@ -79,14 +79,12 @@ export default class Task extends Component {
     clearInterval(this.timerID);
   }
 
-  //кнопка play
   clickPlay = () => {
     this.setState({
       play: true,
     });
   };
 
-  //кнопка stop
   clickStop = () => {
     this.setState({
       play: false,
