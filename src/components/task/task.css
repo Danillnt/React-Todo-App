@@ -1,0 +1,68 @@
+/* .edit {
+   background-color: brown;
+} */
+
+/* li {
+   background-color: red;
+} */
+
+.hidden {
+   display: none;
+}
+.hidden2 {
+   display: none;
+}
+
+.taskFormHidden {
+   display: none !important;
+}
+
+.taskForm {
+   display: none;
+}
+
+.blockForm {
+   display: block;
+}
+
+/* .edit {
+   display: none;
+} */
+.timer {
+	font-size: 13px;
+	color: gray;
+}
+
+ .icon {
+	width: 30px;
+	height: 40px;
+	font-size: 34px;
+	color: #cc9a9a;
+	margin: auto 0;
+	transition: color 0.2s ease-out;
+	cursor: pointer;
+}
+
+.icon-pause, .icon-play {
+	font-size: 18px;
+	width: 18px;
+	height: 18px
+}
+
+.icon-play {
+	font-size: 15px; 
+}
+
+.icon-pause:after {
+	content: '⏸';
+}
+
+.icon-play:after {
+	content: '▶';
+}
+
+.time {
+	margin-left: 15px;
+}
+
+
