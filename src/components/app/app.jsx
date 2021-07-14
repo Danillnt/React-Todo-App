@@ -7,42 +7,41 @@ import Footer from "../footer/footer";
 import "./app.css";
 
 export default class App extends Component {
-  maxId = 100; //id элементов списка
+  maxId = 100;
 
   state = {
-    todoData: [], //массив с объектами элементами с доп.инфой
+    todoData: [],
   };
 
-  //создаем новый элемент
   addTask = (text) => {
-    // const newTask = this.createTodoItem(text);
-    const newTask = {
-      label: text, // текст инпута
-      id: this.maxId++, //id для списка
-      done: false, //состояние перечёркнуто
-      all: false, //состояние нажатие кнопки "весь список"
-      active: false, //состояние нажатие кнопки "активные"
-      completed: false, //состояние нажатие кнопки "завершенные"
-      date: new Date(), //получаем дату при создании элемента
-      stop: false, //статус счётчика времени
-      play: false, //статус счётчика времени
-    };
-
-    this.setState(({ todoData }) => {
-      const newArr = [...todoData, newTask];
-
-      return {
-        todoData: newArr,
+    if (text.length > 0) {
+      const newTask = {
+        label: text,
+        id: this.maxId++,
+        done: false,
+        all: false,
+        active: false,
+        completed: false,
+        date: new Date(),
+        stop: false,
+        play: false,
       };
-    });
+
+      this.setState(({ todoData }) => {
+        const newArr = [...todoData, newTask];
+
+        return {
+          todoData: newArr,
+        };
+      });
+    }
   };
 
-  //удаляем элемент по переданному id
   deleteItem = (id) => {
     this.setState(({ todoData }) => {
-      const newArray = todoData.filter((i) => {
-        if (i.id !== id) {
-          return i;
+      const newArray = todoData.filter((item) => {
+        if (item.id !== id) {
+          return item;
         } else {
           return null;
         }
@@ -54,12 +53,11 @@ export default class App extends Component {
     });
   };
 
-  //очистить завершённые
   clearСompleted = () => {
     this.setState(({ todoData }) => {
-      const newTask = todoData.filter((i) => {
-        if (!i.done) {
-          return i;
+      const newTask = todoData.filter((item) => {
+        if (!item.done) {
+          return item;
         } else {
           return null;
         }
@@ -70,7 +68,6 @@ export default class App extends Component {
     });
   };
 
-  //зачеркивание текста
   onToggleDone = (id) => {
     this.setState(({ todoData }) => {
       const idx = todoData.findIndex((el) => el.id === id);
@@ -87,16 +84,15 @@ export default class App extends Component {
     });
   };
 
-  //нажатие кнопки активные меняем состояние компонента (скрваем елементы с помощью нового класса)
   activeTask = () => {
     this.setState(({ todoData }) => {
-      let newArr = todoData.filter((i) => {
-        if (!i.done) {
-          i.active = true;
-          return i;
+      let newArr = todoData.filter((item) => {
+        if (!item.done) {
+          item.active = true;
+          return item;
         } else {
-          i.completed = false;
-          return i;
+          item.completed = false;
+          return item;
         }
       });
 
@@ -106,16 +102,15 @@ export default class App extends Component {
     });
   };
 
-  //нажатие кнопки завершённые меняем состояние компонента (скрваем елементы с помощью нового класса)
   completedTask = () => {
     this.setState(({ todoData }) => {
-      let newArr = todoData.filter((i) => {
-        if (i.done) {
-          i.completed = true;
-          return i;
+      let newArr = todoData.filter((item) => {
+        if (item.done) {
+          item.completed = true;
+          return item;
         } else {
-          i.active = false;
-          return i;
+          item.active = false;
+          return item;
         }
       });
 
@@ -125,14 +120,13 @@ export default class App extends Component {
     });
   };
 
-  //нажатие кнопки все задачи меняем состояние компонента (показываем елементы с помощью класса)
   allTask = () => {
     this.setState(({ todoData }) => {
-      let newArr = todoData.filter((i) => {
-        i.all = true;
-        i.active = false;
-        i.completed = false;
-        return i;
+      let newArr = todoData.filter((item) => {
+        item.all = true;
+        item.active = false;
+        item.completed = false;
+        return item;
       });
 
       return {
@@ -141,7 +135,6 @@ export default class App extends Component {
     });
   };
 
-  //счётчик оставшихся задач
   doneCount = (todoData) => {
     const doneCount = todoData.filter((el) => el.done).length;
     return todoData.length - doneCount;
@@ -149,8 +142,6 @@ export default class App extends Component {
 
   render() {
     const { todoData } = this.state;
-
-    // console.log(todoData);
 
     return (
       <section className="todoapp">

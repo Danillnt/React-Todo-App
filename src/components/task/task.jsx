@@ -13,35 +13,32 @@ export default class Task extends Component {
     play: false,
   };
 
-  //редактирум задачу инпутом
   onLabelChange = (e) => {
     this.setState({
       label: e.target.value,
     });
   };
 
-  //отключаем перезагрузку страницы формы
   onSubmit = (e) => {
     e.preventDefault();
   };
 
-  //открываем форму редактирования
   clickEditForm = () => {
     this.setState({
       hiddenForm: true,
     });
   };
 
-  //закрываем форму редактирования
   hearEnter = (e) => {
-    if (e.key === "Enter") {
-      this.setState({
-        hiddenForm: false,
-      });
+    if (e.target.value.length > 0) {
+      if (e.key === "Enter") {
+        this.setState({
+          hiddenForm: false,
+        });
+      }
     }
   };
 
-  //меняем класс элементов в зависимости от состояния после нажатие кнопок в футоре
   addClassNameItem = (all, completed, active) => {
     if (all && !completed && !active) {
       return "item";
@@ -52,7 +49,6 @@ export default class Task extends Component {
     }
   };
 
-  //функция вызывается каждую секунду и меняет состояние
   increment() {
     if (this.state.sek <= 60 && this.state.play) {
       this.setState({
@@ -67,14 +63,12 @@ export default class Task extends Component {
     }
   }
 
-  //срабатывает после того, как компонент был впервые отрисован
   componentDidMount() {
     // if (this.state.play) {
     this.timerID = setInterval(() => this.increment(), 1000);
     // }
   }
 
-  //очищать таймер в методе жизненного цикла
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
@@ -97,17 +91,15 @@ export default class Task extends Component {
 
     const { sek, min } = this.state;
 
-    let result = formatDistanceToNow(date, { includeSeconds: true }); // дата сколько минут назад создана задача
+    let result = formatDistanceToNow(date, { includeSeconds: true });
 
-    let classNames = "description"; //для зачёркивания
-    let classForm = "taskForm"; // для формы редактирования
+    let classNames = "description";
+    let classForm = "taskForm";
 
-    //зачёркиваем текст
     if (done) {
       classNames += " done ";
     }
 
-    //показываем форму редактирования
     if (this.state.hiddenForm) {
       classForm = "blockForm";
     }

@@ -4,17 +4,15 @@ import "./newTaskForm.css";
 
 export default class NewTaskForm extends Component {
   state = {
-    label: "", //текст с импута
+    label: "",
   };
 
-  //в состояние записываем нажатые символы импута
   onLabelChange = (e) => {
     this.setState({
       label: e.target.value,
     });
   };
 
-  //после нажатия enter вызываем функцию с ком.app и добовляем элемент
   onSubmit = (e) => {
     e.preventDefault();
     this.props.addTask(this.state.label);
