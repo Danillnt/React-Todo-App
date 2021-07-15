@@ -90,4 +90,7 @@ body {
    .todo-list li label .description {
       font-size: 15px;
    }
+ .icon-pause, .icon-play {
+      margin-right: 16px;
+   }
 }
